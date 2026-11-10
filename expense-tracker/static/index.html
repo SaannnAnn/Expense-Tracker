@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Expense tracker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <header><h1>Expense tracker</h1></header>
+
+  <section id="summary" aria-live="polite">
+    <div class="period">
+      <button type="button" id="prev-period" class="secondary small" aria-label="Previous">&lsaquo;</button>
+      <select id="sum-month" aria-label="Month"></select>
+      <select id="sum-year" aria-label="Year"></select>
+      <button type="button" id="next-period" class="secondary small" aria-label="Next">&rsaquo;</button>
+      <button type="button" id="this-month" class="secondary small">This month</button>
+    </div>
+    <h2 id="summary-title">This month</h2>
+    <p id="summary-total" class="total">–</p>
+    <div id="summary-breakdown"></div>
+  </section>
+
+  <section>
+    <h2 id="form-title">Add expense</h2>
+    <form id="expense-form" novalidate>
+      <label>Title
+        <input name="title" maxlength="100" placeholder="Coffee at Starbucks" required>
+        <span class="err" data-for="title"></span>
+      </label>
+      <label>Amount (₹)
+        <input name="amount" inputmode="decimal" placeholder="0.00" required>
+        <span class="err" data-for="amount"></span>
+      </label>
+      <label>Category
+        <select name="category"></select>
+        <span class="err" data-for="category"></span>
+      </label>
+      <label>Date
+        <input name="date" type="date" required>
+        <span class="err" data-for="date"></span>
+      </label>
+      <label class="wide">Note (optional)
+        <textarea name="note" rows="2" maxlength="1000"></textarea>
+        <span class="err" data-for="note"></span>
+      </label>
+      <div class="wide actions">
+        <button type="submit" id="save-btn">Add expense</button>
+        <button type="button" id="cancel-btn" class="secondary" hidden>Cancel</button>
+        <span id="form-msg" class="err" role="alert"></span>
+      </div>
+    </form>
+  </section>
+
+  <section>
+    <h2>Expenses</h2>
+    <form id="filters">
+      <label>Search title <input name="q" type="search" placeholder="e.g. coffee"></label>
+      <label>Category <select name="category"><option value="">All</option></select></label>
+      <label>From <input name="from" type="date"></label>
+      <label>To <input name="to" type="date"></label>
+      <button type="button" id="clear-filters" class="secondary">Clear filters</button>
+    </form>
+    <p id="list-msg" class="err" role="alert"></p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Date</th><th>Title</th><th>Category</th><th class="num">Amount</th><th>Note</th><th></th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <p id="empty" class="empty" hidden></p>
+    <p id="list-total" class="muted"></p>
+  </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
